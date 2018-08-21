@@ -1,0 +1,28 @@
+{
+  "env": {
+    "node": true,
+    "browser": false,
+    "jest": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "parser": "babel-eslint",
+  "plugins": ["import", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "rules": {
+    "prettier/prettier": "warn",
+    "semi": ["error", "never"],
+    "max-len": ["error", { "code": 80 }]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
+}

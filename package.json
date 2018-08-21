@@ -1,0 +1,52 @@
+{
+  "name": "jobbr-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "nodemon": "npx nodemon --inspect=5858 -w ./src bin/runServer -e js,json",
+    "dev": "npm run nodemon",
+    "start": "npm run doc && node bin/runServer",
+    "test": "NODE_ENV=test node bin/runMocha",
+    "test-win": "set NODE_ENV=test&& node bin/runMocha",
+    "doc": "apidoc -i ./src/v1/endpoints -o ./doc/v1",
+    "doc-md": "npm run doc && apidoc-markdown -p ./doc/v1 -o DOCUMENTATION.md"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "1.7.0",
+    "cors": "^2.8.4",
+    "express": "^4.8.7",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.17.1",
+    "moment-timezone": "^0.5.13",
+    "mongoose": "^5.1.1",
+    "morgan": "^1.9.0",
+    "network-address": "^1.1.2",
+    "swagger-ui-express": "^2.0.13",
+    "sync-request": "^4.0.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "eslint": "^5.3.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-babel-module": "^4.0.0",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "nodemon": "^1.18.3",
+    "prettier": "^1.14.2",
+    "prettier-cli": "^0.1.0",
+    "prettier-eslint": "^8.8.2"
+  }
+}
