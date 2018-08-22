@@ -23,9 +23,35 @@ const userSchema = new Schema({
     postalCode: String
   },
   status: String,
-  skills: Array,
-  culture: Array,
-  benefits: Array,
+  skills: {
+    description: String,
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Skills'
+      }
+    ]
+  },
+  culture: {
+    description: String,
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'CulturalAttributes'
+      }
+    ]
+  },
+  benefits: {
+    description: String,
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Benefits'
+      }
+    ]
+  },
+  compensation: String,
+  location: Number,
   education: Array,
   jobHistory: Array,
   resumes: Array,
@@ -61,12 +87,16 @@ const findByEmail = email => {
 }
 
 const findById = id => {
-  return User.findById(id).then(result => {
-    result = result.toJSON()
-    delete result._id
-    delete result.__v
-    return result
-  })
+  return User.findById(id)
+    .populate('skills.tags')
+    .populate('culture.tags')
+    .populate('benefits.tags')
+    .then(result => {
+      result = result.toJSON()
+      delete result._id
+      delete result.__v
+      return result
+    })
 }
 
 const createUser = userData => {
@@ -79,6 +109,9 @@ const list = (perPage, page) => {
     User.find()
       .limit(perPage)
       .skip(perPage * page)
+      .populate('skills.tags')
+      .populate('culture.tags')
+      .populate('benefits.tags')
       .exec(function(err, users) {
         if (err) {
           reject(err)
